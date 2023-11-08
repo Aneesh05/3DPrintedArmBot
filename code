@@ -1,0 +1,70 @@
+#include<Servo.h>
+Servo rightmover;
+Servo leftmover;
+Servo claw;
+Servo rotation;
+void setup() {
+  // put your setup code here, to run once:
+rightmover.attach(11);
+leftmover.attach(7);
+rotation.attach(6);
+claw.attach(5);
+
+pinMode(11,OUTPUT);
+pinMode(A1,INPUT);
+pinMode(A2,INPUT);
+pinMode(7,OUTPUT);
+pinMode(5,OUTPUT);
+pinMode(A4,INPUT);
+pinMode(A5,INPUT);
+pinMode(6,OUTPUT);
+
+
+Serial.begin(9600);
+
+}
+int angle = 90;
+void loop() {
+  // put your main code here, to run repeatedly:
+  int joystickx = analogRead(A1);
+  int joysticky = analogRead(A2);
+  int joystickxx = analogRead(A4);
+  int joystickyy = analogRead(A5);
+  
+                  
+if(joystickx<400){
+  angle = angle- 1;
+}
+if(joystickx>400){
+  angle = angle+ 1;
+}
+
+
+if (angle>180){
+  angle = 180;
+}
+
+
+
+
+
+rightmover.write(angle);
+Serial.println(angle);
+
+ 
+leftmover.write(angle);
+Serial.println(angle);
+
+
+  
+//rotation.write(joystickxx);
+//Serial.println(joystickxx);
+
+
+
+//claw.write(joystickyy);
+//Serial.println(joystickyy);
+
+
+  
+} 
